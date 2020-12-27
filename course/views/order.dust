@@ -1,0 +1,120 @@
+{>"layout" /}
+
+{<body}
+    <button type="button" class="btn btn-primary btn-block" data-target="#formModal" data-toggle="modal">Add New Record</button><br>
+
+    <h5>Table filters</h5>
+
+    <input type="text" id="first" placeholder="order id..">
+    <input type="text" id="second" placeholder="client id..">
+    <input type="text" id="third" placeholder="employee id..">
+    <input type="text" id="forth" placeholder="hardware warehouse..">
+    <input type="text" id="fifth" placeholder="date..">
+
+    <br>
+    <h5></h5>
+
+    <table class="table table-light table-bordered" id="order_table">
+        <thead class="thead-dark">  
+            <tr>
+                <th scope="col">order_id</th>
+                <th scope="col">client_id</th>
+                <th scope="col">employee_id</th>
+                <th scope="col">hardware_warehouse</th>
+                <th scope="col">order_date</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id='order_table'>
+            {#order}
+                <tr>
+                    <td scope="row"> {order_id} </td>
+                    <td>{client_id}</td>
+                    <td>{employee_id}</td>
+                    <td>{hardware_warehouse}</td>
+                    <td>{order_date}</td>    
+                    <td>
+                        <button type="button" class="btn btn-default edit-order" data-toggle="modal" data-target="#editFormModal" float="left" data-id="{order_id}" data-client_id="{client_id}" data-employee_id="{employee_id}" data-hardware_warehouse="{hardware_warehouse}" data-order_date="{order_date}"><i class="fas fa-edit"></i></button>
+                    </td> 
+                    <td>
+                        <button type="button" class="btn btn-default delete-record" float="left" data-id="order_id = {order_id}"><i class="fas fa-trash"></i></button>
+                    </td>  
+                </tr>
+            {/order}
+        </tbody>
+    </table>
+
+    <!-- Add Modal -->
+    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" action="/order/add">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Add Record</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="client_id">Client Id</label>
+                            <textarea type="text" class="form-control" name="client_id"></textarea>
+
+                            <label for="employe_id">Employee Id</label>
+                            <textarea type="text" class="form-control" name="employee_id"></textarea>
+
+                            <label for="hardware_warehouse">Hardware Warehouse</label>
+                            <textarea type="text" class="form-control" name="hardware_warehouse"></textarea>
+
+                            <label for="order_date">Order Date</label>
+                            <textarea type="text" class="form-control" name="order_date"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editFormModal" tabindex="-1" role="dialog" aria-labelledby="editFormModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" action="/order/edit">
+                    <input type="hidden" id="edit-form-id" name="id">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Edit Record</h4>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="client_id">Client Id</label>
+                            <textarea type="text" class="form-control" name="client_id"  id="edit-form-client_id"></textarea>
+
+                            <label for="employee_id">Employee Id</label>
+                            <textarea type="text" class="form-control" name="employee_id" id="edit-form-employee_id"></textarea>
+
+                            <label for="hardware_warehouse">Hardware Warehouse Id</label>
+                            <textarea type="text" class="form-control" name="hardware_warehouse" id="edit-form-hardware_warehouse"></textarea>
+
+                            <label for="order_date">Date Of Order</label>
+                            <textarea type="text" class="form-control" name="order_date" id="edit-form-order_date"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+   
+    {/body}

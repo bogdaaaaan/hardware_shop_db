@@ -1,0 +1,166 @@
+{>"layout" /}
+
+{<body}
+
+<button type="button" class="btn btn-primary btn-block" data-target="#formModal" data-toggle="modal">Add New Record</button><br>
+   
+    <h5>Table filters</h5>
+
+    <input type="text" id="first" placeholder="hardware id..">
+    <input type="text" id="second" placeholder="category id..">
+    <input type="text" id="third" placeholder="manufacturer id..">
+    <input type="text" id="forth" placeholder="name..">
+    <input type="text" id="fifth" placeholder="color..">
+    <input type="text" id="sixth" placeholder="material type..">
+    <input type="text" id="seventh" placeholder="connection type..">
+    <input type="text" id="eight" placeholder="size..">
+    <input type="text" id="ninth" placeholder="weight..">
+    <input type="text" id="tenth" placeholder="description..">
+
+    <br>
+    <h5></h5>
+
+    <table class="table table-light table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">hardware_id</th>
+                <th scope="col">category_id</th>
+                <th scope="col">manufacturer_id</th>
+                <th scope="col">name</th>
+                <th scope="col">color</th>
+                <th scope="col">material_type</th>
+                <th scope="col">connection_type</th>
+                <th scope="col">size</th>
+                <th scope="col">weight</th>
+                <th scope="col">description</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id='order_table'>
+            {#hardware}
+                <tr>
+                    <td scope="row"> {hardware_id} </td>
+                    <td>{category_id}</td>
+                    <td>{manufacturer_id}</td>
+                    <td>{name}</td>
+                    <td>{color}</td>    
+                    <td>{material_type}</td>
+                    <td>{connection_type}</td>
+                    <td>{size}</td>    
+                    <td>{weight}</td>    
+                    <td>{description}</td>    
+                    <td>
+                        <button type="button" class="btn btn-default edit-hardware" data-toggle="modal" data-target="#editFormModal" float="left" data-id="{hardware_id}" data-category_id="{category_id}" data-manufacturer_id="{manufacturer_id}" data-name="{name}" data-color="{color}" data-material_type="{material_type}" data-connection_type="{connection_type}" data-size="{size}" data-weight="{weight}" data-description="{description}"><i class="fas fa-edit"></i></button>
+                    </td> 
+                    <td>
+                        <button type="button" class="btn btn-default delete-record" float="left" data-id="hardware_id = {hardware_id}"><i class="fas fa-trash"></i></button>
+                    </td>  
+                </tr>
+            {/hardware}
+        </tbody>
+    </table>
+
+     <!-- Add Modal -->
+     <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" action="/hardware/add">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Add Record</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="category_id">Category Id</label>
+                            <textarea type="text" class="form-control" name="category_id"></textarea>
+
+                            <label for="manufacturer_id">Manufacturer Id</label>
+                            <textarea type="text" class="form-control" name="manufacturer_id"></textarea>
+
+                            <label for="name">Name</label>
+                            <textarea type="text" class="form-control" name="name"></textarea>
+
+                            <label for="color">Color</label>
+                            <textarea type="text" class="form-control" name="color"></textarea>
+
+                            <label for="material_type">Material Type</label>
+                            <textarea type="text" class="form-control" name="material_type"></textarea>
+
+                            <label for="connection_type">Connection Type</label>
+                            <textarea type="text" class="form-control" name="connection_type"></textarea>
+
+                            <label for="size">Size</label>
+                            <textarea type="text" class="form-control" name="size"></textarea>
+
+                            <label for="weight">Weight</label>
+                            <textarea type="text" class="form-control" name="weight"></textarea>
+
+                            <label for="description">Description</label>
+                            <textarea type="text" class="form-control" name="description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+     <!-- Edit Modal -->
+     <div class="modal fade" id="editFormModal" tabindex="-1" role="dialog" aria-labelledby="editFormModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" action="/hardware/edit">
+                    <input type="hidden" id="edit-form-id" name="id">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Edit Record</h4>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="category_id">Category Id</label>
+                            <textarea type="text" class="form-control" name="category_id" id="edit-form-category_id"></textarea>
+
+                            <label for="manufacturer_id">Manufacturer Id</label>
+                            <textarea type="text" class="form-control" name="manufacturer_id" id="edit-form-manufacturer_id"></textarea>
+
+                            <label for="name">Name</label>
+                            <textarea type="text" class="form-control" name="name" id="edit-form-name"></textarea>
+
+                            <label for="color">Color</label>
+                            <textarea type="text" class="form-control" name="color" id="edit-form-color"></textarea>
+
+                            <label for="material_type">Material Type</label>
+                            <textarea type="text" class="form-control" name="material_type" id="edit-form-material_type"></textarea>
+
+                            <label for="connection_type">Connection Type</label>
+                            <textarea type="text" class="form-control" name="connection_type" id="edit-form-connection_type"></textarea>
+
+                            <label for="size">Size</label>
+                            <textarea type="text" class="form-control" name="size" id="edit-form-size"></textarea>
+
+                            <label for="weight">Weight</label>
+                            <textarea type="text" class="form-control" name="weight" id="edit-form-weight"></textarea>
+
+                            <label for="description">Description</label>
+                            <textarea type="text" class="form-control" name="description" id="edit-form-description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    {/body}

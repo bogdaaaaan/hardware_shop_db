@@ -1,0 +1,76 @@
+{>"layout" /}
+
+{<body}
+    <h5>Table filters</h5>
+
+    <input type="text" id="first" placeholder="warehouse id..">
+    <input type="text" id="second" placeholder="hardware id..">
+    <input type="text" id="third" placeholder="unit price..">
+    <input type="text" id="forth" placeholder="units in stock..">
+
+    <br>
+    <h5></h5>
+
+    <table class="table table-light table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">warehouse_id</th>
+                <th scope="col">hardware_id</th>
+                <th scope="col">unit_price</th>
+                <th scope="col">units_in_stock</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead> 
+        <tbody id='order_table'>
+            {#warehouse}
+                <tr>
+                    <td scope="row"> {warehouse_id} </td>
+                    <td>{hardware_id}</td>
+                    <td>{unit_price}</td>
+                    <td>{units_in_stock}</td>
+                    <td>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#editFormModal" float="left"><i class="fas fa-edit"></i></button>
+                    </td> 
+                    <td>
+                        <button type="button" class="btn btn-default delete-record" float="left" data-id="warehouse_id = {warehouse_id}"><i class="fas fa-trash"></i></button>
+                    </td>  
+                </tr>
+            {/warehouse}
+        </tbody>
+    </table>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editFormModal" tabindex="-1" role="dialog" aria-labelledby="editFormModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" action="/edit">
+                    <input type="hidden" id="edit-form-id" name="id">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Edit recipe</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <label for="name">Recipe Name</label>
+                        <input type="text" class="form-control" name="name" id="edit-form-name">
+
+                        <div class="form-group">
+                            <label for="ingridients">Ingridients</label>
+                            <textarea type="text" class="form-control" name="ingridients" id="edit-form-ingridients"></textarea>
+
+                            <label for="directions">Directions</label>
+                            <textarea type="text" class="form-control" name="directions" id="edit-form-directions"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {/body}

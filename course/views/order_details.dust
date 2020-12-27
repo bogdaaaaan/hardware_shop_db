@@ -1,0 +1,119 @@
+{>"layout" /}
+
+{<body}
+    
+    <button type="button" class="btn btn-primary btn-block" data-target="#formModal" data-toggle="modal">Add New Record</button><br>
+    
+    <h5>Table filters</h5>
+
+    <input type="text" id="first" placeholder="order id..">
+    <input type="text" id="second" placeholder="hardware id..">
+    <input type="text" id="third" placeholder="quantity id..">
+    <input type="text" id="forth" placeholder="discount..">
+
+    <br>
+    <h5></h5>
+
+    <table class="table table-light table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">order_id</th>
+                <th scope="col">hardware_id</th>
+                <th scope="col">quantity</th>
+                <th scope="col">discount</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody id="order_table">
+            {#order_details}
+                <tr>
+                    <td scope="row"> {order_id} </td>
+                    <td>{hardware_id}</td>
+                    <td>{quantity}</td>
+                    <td>{discount}</td>
+                    <td>
+                        <button type="button" class="btn btn-default edit-order_details" data-toggle="modal" data-target="#editFormModal" float="left" data-id="{order_id}" data-order_id="{order_id}" data-hardware_id="{hardware_id}" data-quantity="{quantity}" data-discount="{discount}"><i class="fas fa-edit"></i></button>
+                    </td> 
+                    <td>
+                        <button type="button" class="btn btn-default delete-record" float="left"  data-id="order_id = {order_id}"><i class="fas fa-trash"></i></button>
+                    </td>  
+                </tr>
+            {/order_details}
+        </tbody>
+    </table>
+
+
+
+    <!-- Add Modal -->
+    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" action="/order_details/add">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Add Record</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="order_id">Order Id</label>
+                            <textarea type="text" class="form-control" name="order_id"></textarea>
+
+                            <label for="hardware_id">Hardware Id</label>
+                            <textarea type="text" class="form-control" name="hardware_id"></textarea>
+
+                            <label for="quantity">Quantity</label>
+                            <textarea type="text" class="form-control" name="quantity"></textarea>
+
+                            <label for="discount">Discount</label>
+                            <textarea type="text" class="form-control" name="discount"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editFormModal" tabindex="-1" role="dialog" aria-labelledby="editFormModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="POST" action="/order_details/edit">
+                    <input type="hidden" id="edit-form-id" name="id">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Edit Record</h4>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="order_id">Order Id</label>
+                            <textarea type="text" class="form-control" name="order_id"  id="edit-form-order_id"></textarea>
+
+                            <label for="hardware_id">Hardware Id</label>
+                            <textarea type="text" class="form-control" name="hardware_id" id="edit-form-hardware_id"></textarea>
+
+                            <label for="quantity">Quantity</label>
+                            <textarea type="text" class="form-control" name="quantity" id="edit-form-quantity"></textarea>
+
+                            <label for="discount">Discount</label>
+                            <textarea type="text" class="form-control" name="discount" id="edit-form-discount"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {/body}
