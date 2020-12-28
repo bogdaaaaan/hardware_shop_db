@@ -46,7 +46,7 @@ create table hardware (
 	connection_type varchar(50) not null,
 	size varchar(50) not null,
 	weight varchar(50) not null,
-	description varchar(200)
+	description varchar(200) default 'No Description'
 );
 
 create table warehouse (
@@ -285,7 +285,3 @@ create trigger move_to_archive
 before delete on "order"
 	for each row execute function move_to_archive();
 --===============================================================================================
-
--- Default value
-alter table hardware
-alter description set default 'No Description';
